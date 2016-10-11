@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.core.urlresolvers import reverse
 
 
 @python_2_unicode_compatible
@@ -10,6 +11,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+#    def get_url(self):
+#        return reverse('category', args=(self.pk,))
 
 @python_2_unicode_compatible
 class Paper(models.Model):
