@@ -16,6 +16,6 @@ def category_detail(request, category_id):
 
 def paper_detail(request, paper_id):
     paper = Paper.objects.filter(pk=paper_id)
-    return render(request, 'paper_detail.html', {'paper': paper,'paper_id':paper_id})
+    return render(request, 'paper_detail.html', {'paper': paper[0]})
 
 
