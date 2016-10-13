@@ -1,1 +1,37 @@
-haaello world
+<html>
+<body>
+{% for category in  CategoryList %}
+    <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+{% endfor %}
+<hr />
+<br />
+{% for contact in contacts %}
+<hr />
+<h1>{{ contact.title }}</h1>
+<h2>{{ contact.author }}</h2>
+<p>{{ contact.created_time }} {{ contact.update_time }}</p>
+<p>{{ contact.content }}</p>
+
+{% endfor %}
+<hr />
+<div class="pagination">
+    <span class="step-links">
+        {% if contact.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+        </span>
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+</body>
+</html>
+
+
+
+
+

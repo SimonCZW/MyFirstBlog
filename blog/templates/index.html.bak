@@ -1,0 +1,19 @@
+<html>
+<body>
+{% for category in  CategoryList %}
+    <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+{% endfor %}
+{% for paper in PaperList %}    
+    <hr />
+    <h1>{{ paper.title }}</h1>
+    <h2>{{ paper.author }}</h2>
+    <p>{{ paper.created_time }} {{ paper.update_time }}</p>
+    <p>{{ paper.content }}</p>
+{% endfor %}
+</body>
+</html>
+
+
+
+
+

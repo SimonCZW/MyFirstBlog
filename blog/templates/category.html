@@ -1,3 +1,6 @@
 {% for category in  CategoryList %}
-<a href="{% url 'blog:category_detail' category.pk %}">{{ category.name }}</a>
+<a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
 {% endfor %}
+
+
+

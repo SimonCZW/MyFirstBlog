@@ -11,8 +11,9 @@ class Category(models.Model):
     
     def __str__(self):
         return self.name
-#    def get_url(self):
-#        return reverse('category', args=(self.pk,))
+
+    def get_absolute_url(self):
+        return reverse('blog:category_detail', kwargs={'category_id':self.pk})
 
 @python_2_unicode_compatible
 class Paper(models.Model):
