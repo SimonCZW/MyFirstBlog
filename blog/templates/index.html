@@ -1,8 +1,10 @@
 <html>
 <body>
+<h1>CATEGORY:</h1>
 {% for category in  CategoryList %}
     <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
 {% endfor %}
+
 <hr />
 <br />
 {% for contact in contacts %}
@@ -11,12 +13,12 @@
 <h2>{{ contact.author }}</h2>
 <p>{{ contact.created_time }} {{ contact.update_time }}</p>
 <p>{{ contact.content }}</p>
-
 {% endfor %}
+
 <hr />
 <div class="pagination">
     <span class="step-links">
-        {% if contact.has_previous %}
+        {% if contacts.has_previous %}
             <a href="?page={{ contacts.previous_page_number }}">previous</a>
         {% endif %}
         <span class="current">
