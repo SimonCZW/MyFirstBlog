@@ -6,19 +6,21 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def index(request):
     CategoryList = Category.objects.all()
     PaperList = Paper.objects.all()
-    paginator = Paginator(PaperList, 3)
-    page = request.GET.get('page')
-    try:
-        contacts = paginator.page(page)
-    except PageNotAnInteger:
-        contacts = paginator.page(1)
-    except EmptyPage:
-        contacts = pagintor.page(paginator.num_pages)
+#    paginator = Paginator(PaperList, 3)
+#    page = request.GET.get('page')
+#    try:
+#        contacts = paginator.page(page)
+#    except PageNotAnInteger:
+#        contacts = paginator.page(1)
+#    except EmptyPage:
+#        contacts = pagintor.page(paginator.num_pages)
+    return render(request, 'index.html', {'CategoryList':CategoryList ,'PaperList': PaperList})
 
-    return render(request, 'index.html', {'CategoryList':CategoryList, 'contacts':contacts})
+    #return render(request, 'index.html', {'CategoryList':CategoryList, 'contacts':contacts})
     #return render(request, 'index.html', {'CategoryList':CategoryList, 'PaperList':PaperList})
 
-
+def test(request):
+    return render(request, 'test.html', {'teststring':"Xstring"})
 
 #def category(request):
 #    CategoryList = Category.objects.all()
