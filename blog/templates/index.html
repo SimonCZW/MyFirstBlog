@@ -1,36 +1,44 @@
 <html>
 <body>
+<h1>MyFirstBlog</h1>
 <!--
 <h1>CATEGORY:</h1>
 {% for category in  CategoryList %}
     <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
 {% endfor %}
-
 <hr />
 <br />
 -->
-
 {% load pagination_extras %}
 {% pagination PaperList 3 %}
 
 {% for contact in contacts %}
-<h1>{{ contact.title }}</h1>
-<h2>{{ contact.author }}</h2>
-<p>{{ contact.created_time }} {{ contact.update_time }}</p>
-<p>{{ contact.content }}</p>
+    <h1>{{ contact.title }}</h1>
+    <h2>{{ contact.author }}</h2>
+    <p>{{ contact.created_time }} {{ contact.update_time }}</p>
+    <p>{{ contact.content }}</p>
 {% endfor %}
 <hr />
+
+
 <div class="pagination">
     <span class="step-links">
         {% if contacts.has_previous %}
             <a href="?page={{ contacts.previous_page_number }}">previous</a>
         {% endif %}
-        <span class="current">
+        
+        {% for page in total_page %}
+        <a href="?page={{ page }}" >{{ page }}</a>
+        {% endfor %}        
+        
+<!--        <span class="current">
             Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
         </span>
+-->
         {% if contacts.has_next %}
             <a href="?page={{ contacts.next_page_number }}">next</a>
         {% endif %}
+
     </span>
 </div>
 
