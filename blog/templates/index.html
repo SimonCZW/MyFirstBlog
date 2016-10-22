@@ -1,6 +1,7 @@
 <html>
 <body>
 <h1>MyFirstBlog</h1>
+<hr />
 <!--
 <h1>CATEGORY:</h1>
 {% for category in  CategoryList %}
@@ -26,9 +27,16 @@
         {% if contacts.has_previous %}
             <a href="?page={{ contacts.previous_page_number }}">previous</a>
         {% endif %}
-        
+
         {% for page in total_page %}
-        <a href="?page={{ page }}" >{{ page }}</a>
+        {% if current_page == page  %} 
+            {{ page }}   
+        {% else %}
+            <!--{{ page|rtype }}
+            {{ current_page|rtype }}-->
+            <a href="?page={{ page }}" >{{ page }}</a>
+        {% endif %}
+
         {% endfor %}        
         
 <!--        <span class="current">

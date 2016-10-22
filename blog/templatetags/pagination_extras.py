@@ -10,7 +10,7 @@ def pagination(context, paperList, pageNum):
     page = context['request'].GET.get('page')
     try:
         contacts = paginator.page(page)
-        context['current_page'] = page
+        context['current_page'] = int(page)
     except PageNotAnInteger:
         contacts = paginator.page(1)
         context['current_page'] = 1
@@ -23,6 +23,9 @@ def pagination(context, paperList, pageNum):
     return ''
 
 
+@register.filter
+def rtype(value):
+    return type(value)
 
 
 ###################Learn Custom Template filter/tags#####################
