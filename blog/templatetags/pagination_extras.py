@@ -17,10 +17,22 @@ def pagination(context, paperList, pageNum):
     except EmptyPage:
         contacts = paginator.page(paginator.num_pages)
 
+    context['first_page'] = 1
+    context['last_page'] = paginator.num_pages
+
     context['total_page'] = range(1,paginator.num_pages+1) 
     context['contacts'] = contacts
 
     return ''
+
+
+
+
+
+
+
+
+
 
 
 @register.filter

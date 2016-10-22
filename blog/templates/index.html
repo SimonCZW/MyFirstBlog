@@ -27,18 +27,36 @@
         {% if contacts.has_previous %}
         <a href="?page={{ contacts.previous_page_number }}">previous</a>
         {% endif %}
+        
+        {% if current_page == first_page %}
+            {{ current_page }}
+        {% else %}
+            <a href="?page={{ first_page }}">{{ first_page }}</a>
+        {% endif %} 
 
+        
+
+
+        {% if current_page == last_page %}
+            {{ current_page }}
+        {% else %}
+            <a href="?page={{ last_page }}">{{ last_page }}</a>
+        {% endif %}
+
+
+
+<!--
         {% for page in total_page %}
         {% if current_page == page  %} 
             {{ page }}   
         {% else %}
-            <!--{{ page|rtype }}
-            {{ current_page|rtype }}-->
+            {{ page|rtype }}
+            {{ current_page|rtype }}
             <a href="?page={{ page }}" >{{ page }}</a>
         {% endif %}
 
         {% endfor %}        
-        
+-->    
 <!--        <span class="current">
             Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
         </span>
