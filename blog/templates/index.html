@@ -25,7 +25,7 @@
 <div class="pagination">
     <span class="step-links">
         {% if contacts.has_previous %}
-        <a href="?page={{ contacts.previous_page_number }}">previous</a>
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
         {% endif %}
         
         {% if current_page == first_page %}
@@ -34,16 +34,24 @@
             <a href="?page={{ first_page }}">{{ first_page }}</a>
         {% endif %} 
 
+        {% if LeftMoreTag %}
+            <span>...</span>
+        {% endif %}
+
+        {% for LeftPage in left_pages %} 
+            <a href="?page={{ LeftPage }}">{{ LeftPage }}</a>
+        {% endfor %}
+
+        {% if current_page != first_page and current_page != last_page %}
+            <span>{{ current_page }}</span>
+        {% endif %}
+
         
-
-
         {% if current_page == last_page %}
             {{ current_page }}
         {% else %}
             <a href="?page={{ last_page }}">{{ last_page }}</a>
         {% endif %}
-
-
 
 <!--
         {% for page in total_page %}
