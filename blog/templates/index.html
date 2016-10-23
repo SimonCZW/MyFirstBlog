@@ -46,7 +46,14 @@
             <span>{{ current_page }}</span>
         {% endif %}
 
-        
+        {% for RightPage in right_pages %}
+            <a href="?page={{ RightPage }}">{{ RightPage }}</a>
+        {% endfor %}
+
+        {% if RightMoreTag %}
+            <span>...</span>
+        {% endif %}
+
         {% if current_page == last_page %}
             {{ current_page }}
         {% else %}
@@ -64,7 +71,7 @@
         {% endif %}
 
         {% endfor %}        
--->    
+-->        
 <!--        <span class="current">
             Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
         </span>

@@ -7,7 +7,7 @@ CategoryList = ['opendaylight', 'netconf', 'sdn']
 
 for category in CategoryList:
     c = Category.objects.get_or_create(name=category)[0]
-    for i in range(1,6):
+    for i in range(7,17):
         p = Paper.objects.get_or_create(
             title = category+'_'+str(i),
             content = "This is a test...",

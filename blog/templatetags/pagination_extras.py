@@ -23,52 +23,49 @@ def pagination(context, paperList, pageNum):
     context['total_page'] = range(1,paginator.num_pages+1) 
     context['contacts'] = contacts
 
+    total_length = int(paginator.num_pages)
     limit_length = 2
-    #get left page list
+    #get left directory list
     try:
         context['left_pages'], context['LeftMoreTag'] = get_left(int(page), limit_length)
+    #for index.html without page
     except:
         context['left_pages'], context['LeftMoreTag'] = get_left(1, limit_length)
-
-
-#    context['right_pages'] = get_right(int(page), 2)
+    
+    #get right directory list
+    try:
+        context['right_pages'], context['RightMoreTag'] = get_right(int(page), limit_length, total_length)
+    except Exception,e:
+#        context['errmsg'] = e
+        context['right_pages'], context['RightMoreTag'] = get_right(1, limit_length, total_length)
+        
     return ''
 
 #return left page list
-def get_left(current_page, limit_page):
-    #judge limit_page len
+def get_left(current_page, limit_list_page):
+
     #further more
-    if len(range(2, current_page)) > limit_page:
-        LeftPageList = range(2, current_page+1)[-1-limit_page:-1] 
+    if len(range(2, current_page)) > limit_list_page:
+        LeftPageList = range(2, current_page+1)[-1-limit_list_page:-1] 
         LeftMoreTag = True  
-    
+    #just left directory 
     else:
         LeftPageList = range(2, current_page)
         LeftMoreTag = False
 
     return LeftPageList, LeftMoreTag
+
+def get_right(current_page, limit_list_page, total_list_page):
     
-    ##perfectly
-    #elif len(range(2, current_page)) == limit_page:
-    #    LeftPageList = range(2, current_page)
-    #    MoreTag = False
-    ##just 2
-    #elif len(range(2, current_page)) == 0:
-    #    LeftPageList = []
-    #    MoreTag = False
-    #else:
-    #    LeftPageList = range(2, current_page)
-    #    MoreTag = False
+    if len(range(current_page+1, total_list_page)) > limit_list_page:
+        RightPageList = range(current_page+1, total_list_page)[0:limit_list_page] 
+        RightMoreTag = True
     
-
-#return right page list
-#def get_right(current_page, limit_page):
-#
-#    return LeftPageList
-
-
-
-
+    else:
+        RightPageList = range(current_page+1, total_list_page)
+        RightMoreTag = False
+    
+    return RightPageList, RightMoreTag
 
 
 

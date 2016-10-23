@@ -5,4 +5,7 @@
 {{ teststring }}
 {% upper %} xxxx {% endupper %}
 
-<span>...</span>
+{{ total_length }}
+{% for page in total_page %}
+    {{ page }}
+{% endfor %}
