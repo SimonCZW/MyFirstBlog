@@ -24,20 +24,21 @@ def pagination(context, paperList, pageNum):
     context['contacts'] = contacts
 
     total_length = int(paginator.num_pages)
-    limit_length = 2
+    limit_left_length = 2
+    limit_right_length = 3
     #get left directory list
     try:
-        context['left_pages'], context['LeftMoreTag'] = get_left(int(page), limit_length)
+        context['left_pages'], context['LeftMoreTag'] = get_left(int(page), limit_left_length)
     #for index.html without page
     except:
-        context['left_pages'], context['LeftMoreTag'] = get_left(1, limit_length)
+        context['left_pages'], context['LeftMoreTag'] = get_left(1, limit_left_length)
     
     #get right directory list
     try:
-        context['right_pages'], context['RightMoreTag'] = get_right(int(page), limit_length, total_length)
+        context['right_pages'], context['RightMoreTag'] = get_right(int(page), limit_right_length, total_length)
     except Exception,e:
 #        context['errmsg'] = e
-        context['right_pages'], context['RightMoreTag'] = get_right(1, limit_length, total_length)
+        context['right_pages'], context['RightMoreTag'] = get_right(1, limit_right_length, total_length)
         
     return ''
 
