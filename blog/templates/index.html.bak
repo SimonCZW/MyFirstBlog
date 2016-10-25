@@ -1,39 +1,90 @@
 <html>
 <body>
+<h1>MyFirstBlog</h1>
+<hr />
+<!--
 <h1>CATEGORY:</h1>
 {% for category in  CategoryList %}
     <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
 {% endfor %}
-
 <hr />
 <br />
-{% for contact in contacts %}
-<hr />
-<h1>{{ contact.title }}</h1>
-<h2>{{ contact.author }}</h2>
-<p>{{ contact.created_time }} {{ contact.update_time }}</p>
-<p>{{ contact.content }}</p>
-{% endfor %}
+-->
+{% load pagination_extras %}
+{% pagination PaperList 3 %}
 
+{% for contact in contacts %}
+    <h1>{{ contact.title }}</h1>
+    <h2>{{ contact.author }}</h2>
+    <p>{{ contact.created_time }} {{ contact.update_time }}</p>
+    <p>{{ contact.content }}</p>
+    <a href="{{ contact.get_absolute_url }}">readmore</a>
+{% endfor %}
 <hr />
+
+
 <div class="pagination">
     <span class="step-links">
         {% if contacts.has_previous %}
             <a href="?page={{ contacts.previous_page_number }}">previous</a>
         {% endif %}
-        <span class="current">
+        
+        {% if current_page == first_page %}
+            {{ current_page }}
+        {% else %}
+            <a href="?page={{ first_page }}">{{ first_page }}</a>
+        {% endif %} 
+
+        {% if LeftMoreTag %}
+            <span>...</span>
+        {% endif %}
+
+        {% for LeftPage in left_pages %} 
+            <a href="?page={{ LeftPage }}">{{ LeftPage }}</a>
+        {% endfor %}
+
+        {% if current_page != first_page and current_page != last_page %}
+            <span>{{ current_page }}</span>
+        {% endif %}
+
+        {% for RightPage in right_pages %}
+            <a href="?page={{ RightPage }}">{{ RightPage }}</a>
+        {% endfor %}
+
+        {% if RightMoreTag %}
+            <span>...</span>
+        {% endif %}
+
+        {% if current_page == last_page %}
+            {{ current_page }}
+        {% else %}
+            <a href="?page={{ last_page }}">{{ last_page }}</a>
+        {% endif %}
+
+<!--
+        {% for page in total_page %}
+        {% if current_page == page  %} 
+            {{ page }}   
+        {% else %}
+            {{ page|rtype }}
+            {{ current_page|rtype }}
+            <a href="?page={{ page }}" >{{ page }}</a>
+        {% endif %}
+
+        {% endfor %}        
+-->        
+<!--        <span class="current">
             Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
         </span>
+-->
         {% if contacts.has_next %}
-            <a href="?page={{ contacts.next_page_number }}">next</a>
+        <a href="?page={{ contacts.next_page_number }}">next</a>
         {% endif %}
+
     </span>
 </div>
 
 </body>
 </html>
-
-
-
 
 
