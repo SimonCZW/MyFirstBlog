@@ -1,110 +1,229 @@
-<html>
-<html lang="zh-cn">
-<head>    
+<html lang="en">
+<head>
     <meta charset="utf-8">
-    <title>MyBlog</title>
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="../../favicon.ico">-->
+    <title>Blog Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!-- Custom styles for this template -->
+    <!--<link href="blog.css" rel="stylesheet">-->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
 
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style>
 </head>
-<body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+  <body>
+
+  <!--
+    head
+  -->
+    <div class="blog-masthead">
       <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">MyFirstBlog</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About me</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="#">Home</a>
+          <a class="blog-nav-item" href="#">About Me</a>
+          <a class="blog-nav-item" href="#">Contact</a>
+        </nav>
       </div>
- </nav>
+    </div>
 
-<div class=container">
 
-{% load pagination_extras %}
-{% pagination PaperList 3 %}
 
-{% for contact in contacts %}
-    <div class="starter-template">
-    <h1>{{ contact.title }}</h1>
-    <h2>{{ contact.author }}</h2>
-    <p>{{ contact.created_time }} {{ contact.update_time }}</p>
-    <p>{{ contact.content }}</p>
-    <a href="{{ contact.get_absolute_url }}">readmore</a>
-{% endfor %}
+    <div class="container">
 
-</div>
-</div>
+      
+      <div class="blog-header">
+        <h1 class="blog-title">SimonCZW Blog</h1>
+        <p class="lead blog-description">Built by Django and Boostrap</p>
+      </div>
 
-<div class="pagination">
-    <span class="step-links">
-        {% if contacts.has_previous %}
-            <a href="?page={{ contacts.previous_page_number }}">previous</a>
-        {% endif %}
-        
-        {% if current_page == first_page %}
-            {{ current_page }}
-        {% else %}
-            <a href="?page={{ first_page }}">{{ first_page }}</a>
-        {% endif %} 
+      <div class="row">
 
-        {% if LeftMoreTag %}
-            <span>...</span>
-        {% endif %}
 
-        {% for LeftPage in left_pages %} 
-            <a href="?page={{ LeftPage }}">{{ LeftPage }}</a>
-        {% endfor %}
+        <div class="col-sm-8 blog-main">
+          
 
-        {% if current_page != first_page and current_page != last_page %}
-            <span>{{ current_page }}</span>
-        {% endif %}
+          {% load pagination_extras %}
+          {% pagination PaperList 3 %}
 
-        {% for RightPage in right_pages %}
-            <a href="?page={{ RightPage }}">{{ RightPage }}</a>
-        {% endfor %}
+          {% for contact in contacts %}
 
-        {% if RightMoreTag %}
-            <span>...</span>
-        {% endif %}
+          <div class="blog-post">
+            <h2 class="blog-post-title">{{ contact.title }}</h2>
+            <p class="blog-post-meta">{{ contact.update_time }} by {{ contact.author }}  <a href="{{ contact.get_absolute_url }}">Readmore</a></p>
+            <p>
+              {{ contact.content }}
+            </p>
+          </div>
 
-        {% if current_page == last_page %}
-            {{ current_page }}
-        {% else %}
-            <a href="?page={{ last_page }}">{{ last_page }}</a>
-        {% endif %}
+          {% endfor %}
+          <!--
+          pagination
+          -->
+          <!--
+          <nav>
+            <ul class="pager">
+              <li><a href="#">Previous</a></li>
+              <li><a href="#">Next</a></li>
+            </ul>
+          </nav>
+          -->
+          <nav>
+            <ul class="pager">
+              <span class="step-links">
+                  {% if contacts.has_previous %}
+                      <li><a href="?page={{ contacts.previous_page_number }}">previous</a></li>
+                  {% endif %}
+                  
+                  {% if current_page == first_page %}
+                      <li>{{ current_page }}</li>
+                  {% else %}
+                      <li><a href="?page={{ first_page }}">{{ first_page }}</a></li>
+                  {% endif %} 
 
-<!--
-        {% for page in total_page %}
-        {% if current_page == page  %} 
-            {{ page }}   
-        {% else %}
-            {{ page|rtype }}
-            {{ current_page|rtype }}
-            <a href="?page={{ page }}" >{{ page }}</a>
-        {% endif %}
+                  {% if LeftMoreTag %}
+                      <span>...</span>
+                  {% endif %}
 
-        {% endfor %}        
--->        
-<!--        <span class="current">
-            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
-        </span>
+                  {% for LeftPage in left_pages %} 
+                      <li><a href="?page={{ LeftPage }}">{{ LeftPage }}</a></li>
+                  {% endfor %}
+
+                  {% if current_page != first_page and current_page != last_page %}
+                      <span>{{ current_page }}</span>
+                  {% endif %}
+
+                  {% for RightPage in right_pages %}
+                      <li><a href="?page={{ RightPage }}">{{ RightPage }}</a></li>
+                  {% endfor %}
+
+                  {% if RightMoreTag %}
+                      <span>...</span>
+                  {% endif %}
+
+                  {% if current_page == last_page %}
+                    <li>{{ current_page }}</li>
+                  {% else %}
+                    <li><a href="?page={{ last_page }}">{{ last_page }}</a></li>
+                  {% endif %}
+
+                  {% if contacts.has_next %}
+                    <li><a href="?page={{ contacts.next_page_number }}">next</a></li>
+                  {% endif %}
+
+              </ul>
+          </nav>
+
+
+
+
+
+
+        </div><!-- /.blog-main -->
+
+
+
+
+        <!--
+        right blog-sidebar
+        -->
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">March 2014</a></li>
+              <li><a href="#">February 2014</a></li>
+              <li><a href="#">January 2014</a></li>
+              <li><a href="#">December 2013</a></li>
+              <li><a href="#">November 2013</a></li>
+              <li><a href="#">October 2013</a></li>
+              <li><a href="#">September 2013</a></li>
+              <li><a href="#">August 2013</a></li>
+              <li><a href="#">July 2013</a></li>
+              <li><a href="#">June 2013</a></li>
+              <li><a href="#">May 2013</a></li>
+              <li><a href="#">April 2013</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+
+
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <div class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/docs.min.js"></script>
 -->
-        {% if contacts.has_next %}
-        <a href="?page={{ contacts.next_page_number }}">next</a>
-        {% endif %}
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+-->
 
-    </span>
+<div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;" title="" data-original-title="Copy to clipboard">      
+  <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" width="100%" height="100%">   <param name="movie" value="/assets/flash/ZeroClipboard.swf?noCache=1477318732559">         
+  <param name="allowScriptAccess" value="sameDomain">         
+  <param name="scale" value="exactfit">         
+  <param name="loop" value="false">         
+  <param name="menu" value="false">         
+  <param name="quality" value="best">         
+  <param name="bgcolor" value="#ffffff">         
+  <param name="wmode" value="transparent">         
+  <param name="flashvars" value="trustedOrigins=v3.bootcss.com%2C%2F%2Fv3.bootcss.com%2Chttp%3A%2F%2Fv3.bootcss.com">         
+  <embed src="/assets/flash/ZeroClipboard.swf?noCache=1477318732559" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="100%" height="100%" name="global-zeroclipboard-flash-bridge" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="trustedOrigins=v3.bootcss.com%2C%2F%2Fv3.bootcss.com%2Chttp%3A%2F%2Fv3.bootcss.com" scale="exactfit">                
+  </object>
 </div>
 
 </body>
