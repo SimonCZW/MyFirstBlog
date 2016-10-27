@@ -1,4 +1,5 @@
 <html lang="en">
+{% load staticfiles %}
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,8 +11,16 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+<!--
+    <link href="{% static 'blog/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/css/bootstrap.min.responsive.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/css/local.css' %}" rel="stylesheet">
+-->
+
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    
+
     <!-- Custom styles for this template -->
     <!--<link href="blog.css" rel="stylesheet">-->
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -38,34 +47,34 @@
 </style>
 </head>
 
-  <body>
-
-  <!--
-    head
-  -->
-    <div class="blog-masthead">
-      <div class="container">
-        <nav class="blog-nav">
-          <a class="blog-nav-item active" href="#">Home</a>
-          <a class="blog-nav-item" href="#">About Me</a>
-          <a class="blog-nav-item" href="#">Contact</a>
-        </nav>
-      </div>
-    </div>
-
-
-
+<!-- navigator -->
+<div id="navigator" class="navbar-inverse">
     <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+        <ul id="navList" class="nav navbar-nav">
+            <li><a id="blog_nav_sitehome" class="menu" href="{% url 'blog:index' %}">Home</a></li>
+            <li><a id="blog_nav_contact" class="menu" rel="nofollow" href="{% url 'blog:test' %}">About</a></li>
+            <li><a id="blog_nav_admin" class="menu" rel="nofollow" href="{% url 'blog:category' %}">admin</a></li>
+        </ul>
+        </div>
+    </div>
+</div>
 
+<div class="container">
       
-      <div class="blog-header">
+    <div class="blog-header">
         <h1 class="blog-title">SimonCZW Blog</h1>
         <p class="lead blog-description">Built by Django and Boostrap</p>
-      </div>
+    </div>
 
-      <div class="row">
-
-
+    <div class="row">
         <div class="col-sm-8 blog-main">
           
 
@@ -83,17 +92,10 @@
           </div>
 
           {% endfor %}
-          <!--
-          pagination
-          -->
-          <!--
-          <nav>
-            <ul class="pager">
-              <li><a href="#">Previous</a></li>
-              <li><a href="#">Next</a></li>
-            </ul>
-          </nav>
-          -->
+
+
+
+          <!-- paginator -->
           <nav>
             <ul class="pager">
               <span class="step-links">
@@ -138,15 +140,9 @@
                   {% endif %}
 
               </ul>
-          </nav>
-
-
-
-
-
+            </nav>
 
         </div><!-- /.blog-main -->
-
 
 
 
@@ -154,10 +150,12 @@
         right blog-sidebar
         -->
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            
           <div class="sidebar-module sidebar-module-inset">
             <h4>About</h4>
             <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
           </div>
+          
           <div class="sidebar-module">
             <h4>Archives</h4>
             <ol class="list-unstyled">
@@ -175,6 +173,7 @@
               <li><a href="#">April 2013</a></li>
             </ol>
           </div>
+          
           <div class="sidebar-module">
             <h4>Elsewhere</h4>
             <ol class="list-unstyled">
@@ -191,40 +190,12 @@
       </div><!-- /.row -->
 
     </div><!-- /.container -->
-
     <div class="blog-footer">
       <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
       <p>
         <a href="#">Back to top</a>
       </p>
     </div>
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-<!--    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/docs.min.js"></script>
--->
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<!--
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
--->
-
-<div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;" title="" data-original-title="Copy to clipboard">      
-  <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" width="100%" height="100%">   <param name="movie" value="/assets/flash/ZeroClipboard.swf?noCache=1477318732559">         
-  <param name="allowScriptAccess" value="sameDomain">         
-  <param name="scale" value="exactfit">         
-  <param name="loop" value="false">         
-  <param name="menu" value="false">         
-  <param name="quality" value="best">         
-  <param name="bgcolor" value="#ffffff">         
-  <param name="wmode" value="transparent">         
-  <param name="flashvars" value="trustedOrigins=v3.bootcss.com%2C%2F%2Fv3.bootcss.com%2Chttp%3A%2F%2Fv3.bootcss.com">         
-  <embed src="/assets/flash/ZeroClipboard.swf?noCache=1477318732559" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="100%" height="100%" name="global-zeroclipboard-flash-bridge" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="trustedOrigins=v3.bootcss.com%2C%2F%2Fv3.bootcss.com%2Chttp%3A%2F%2Fv3.bootcss.com" scale="exactfit">                
-  </object>
-</div>
 
 </body>
 </html>

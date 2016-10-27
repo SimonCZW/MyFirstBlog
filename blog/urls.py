@@ -19,7 +19,7 @@ from blog import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^test/$', views.test),
+    url(r'^test/$', views.test, name='test'),
     url(r'^category/$', views.category, name='category'),
     url(r'^category/(?P<category_id>[0-9]+)/$', views.category_detail, name='category_detail'),    
     url(r'^paper/(?P<paper_id>[0-9]+)/$', views.paper_detail, name='paper'),
