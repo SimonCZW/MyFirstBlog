@@ -79,20 +79,20 @@
 
           {% load pagination_extras %}
           {% pagination PaperList 3 %}
+          {% load markdown_tags %}
 
           {% for contact in contacts %}
 
           <div class="blog-post">
-            <h3 class="blog-post-title">{{ contact.title }}</h3>
+            <!--  <h3 class="blog-post-title">{{ contact.title }}</h3>
             <p class="blog-post-meta">{{ contact.update_time }} by {{ contact.author }}  <a href="{{ contact.get_absolute_url }}">Readmore</a></p>
-            <p>
-              {{ contact.content }}
-            </p>
+            -->
+            {{ contact.content|Trans4markdown }}
+            <p class="blog-post-meta">{{ contact.update_time }} by {{ contact.author }}  <a href="{{ contact.get_absolute_url }}">Readmore</a></p>
+            <hr />
           </div>
 
           {% endfor %}
-
-
 
           <!-- paginator -->
           <nav>
@@ -139,8 +139,7 @@
                   {% endif %}
 
               </ul>
-            </nav>
-
+              </nav>
         </div><!-- /.blog-main -->
 
 
@@ -189,6 +188,8 @@
       </div><!-- /.row -->
 
     </div><!-- /.container -->
+
+
 
 <!--
 <hr />

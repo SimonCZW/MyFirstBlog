@@ -2,10 +2,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from blog.models import Category,Paper
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from markdown import markdown
 
 def index(request):
     CategoryList = Category.objects.all()
     PaperList = Paper.objects.all()
+ #   PaperList2 = []
+ #   for paper in  PaperList:
+ #       paper.content =  markdown(paper.content)
+ #       PaperList2.append(paper)
 #    paginator = Paginator(PaperList, 3)
 #    page = request.GET.get('page')
 #    try:
@@ -24,11 +29,11 @@ def test(request):
 
 #def category(request):
 #    CategoryList = Category.objects.all()
-#    return render(request, 'category.html', {'CategoryList':CategoryList}) 
+#    return render(request, 'category.html', {'CategoryList':CategoryList})
 
 def category(request):
     CategoryList = Category.objects.all()
-    return render(request, 'category.html', {'CategoryList':CategoryList}) 
+    return render(request, 'category.html', {'CategoryList':CategoryList})
 
 def category_detail(request, category_id):
     category = Category.objects.get(pk=category_id)
