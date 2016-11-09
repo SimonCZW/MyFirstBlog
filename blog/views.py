@@ -6,7 +6,7 @@ from markdown import markdown
 
 def index(request):
     CategoryList = Category.objects.all()
-    PaperList = Paper.objects.all()
+    PaperList = Paper.objects.all().order_by('-update_time')
  #   PaperList2 = []
  #   for paper in  PaperList:
  #       paper.content =  markdown(paper.content)
