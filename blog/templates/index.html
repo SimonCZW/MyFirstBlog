@@ -103,7 +103,7 @@
                   {% if contacts.has_previous %}
                       <li><a href="?page={{ contacts.previous_page_number }}">previous</a></li>
                   {% endif %}
-                  
+
                   {% if current_page == first_page %}
                       <li>{{ current_page }}</li>
                   {% else %}
@@ -119,7 +119,7 @@
                   {% endfor %}
 
                   {% if current_page != first_page and current_page != last_page %}
-                      <span>{{ current_page }}</span>
+                  <span>{{ current_page }}</span>
                   {% endif %}
 
                   {% for RightPage in right_pages %}
@@ -130,12 +130,14 @@
                       <span>...</span>
                   {% endif %}
 
-                  {% if current_page == last_page %}
+                  {% if current_page == first_page and current_page == last_page %}
+                 
+                  {% elif current_page == last_page %}
                     <li>{{ current_page }}</li>
                   {% else %}
                     <li><a href="?page={{ last_page }}">{{ last_page }}</a></li>
                   {% endif %}
-
+                  
                   {% if contacts.has_next %}
                     <li><a href="?page={{ contacts.next_page_number }}">next</a></li>
                   {% endif %}
