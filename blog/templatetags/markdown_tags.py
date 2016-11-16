@@ -3,7 +3,7 @@ from django.template.defaultfilters import stringfilter
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 from django.utils.html import format_html
-import markdown
+import markdown2
 
 register = template.Library()
 
@@ -11,7 +11,7 @@ register = template.Library()
 @register.filter(needs_autoescape=True)
 @stringfilter
 def Trans4markdown(value, autoescape=True):
-     return format_html(markdown.markdown(force_text(value)))
+     return format_html(markdown2.markdown(force_text(value)))
 #     return mark_safe(markdown.markdown(force_text(value),
 #         extras=["fenced-code-blocks", "cuddled-lists", "metadata", "tables", "spoiler"]))
 

@@ -1,9 +1,23 @@
 <html>
-<body>
+<body> 
+<!--
     <h1>{{ paper.title }}</h1>
     <hr />
     <h2>{{ paper.author }}</h2>
     <p>{{ paper.created_time }}<br />{{ paper.update_time }}</p>
-    <p>{{ paper.content }}</p>
+-->
+
+    {% load paper_pre_next %}
+    {% if paper.pk|has_previous_paper %}
+    <a href={{ paper.pk|get_previous_url }}>previous: {{ paper.pk|get_previous_name }}</a>
+    {% endif %}
+
+    {% if paper.pk|has_next_paper %}
+    <a href={{ paper.pk|get_next_url }}>next: {{ paper.pk|get_next_name }}</a>
+    {% endif %}
+
+    {% load markdown_tags %}  
+    <p>{{ paper.content|Trans4markdown }}</p>
 </body>
 </html>
+

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!--<link rel="icon" href="../../favicon.ico">-->
-    <title>Blog Template for Bootstrap</title>
+    <title>SimonCZW Blog</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
@@ -63,8 +63,10 @@
         <div class="collapse navbar-collapse">
         <ul id="navList" class="nav navbar-nav">
             <li><a id="blog_nav_sitehome" class="menu" href="{% url 'blog:index' %}">SimonCZW</a></li>
-            <li><a id="blog_nav_contact" class="menu" rel="nofollow" href="{% url 'blog:test' %}">About</a></li>
+            <li><a id="blog_nav_contact" class="menu" rel="nofollow" href="{% url 'blog:aboutme' %}">About</a></li>
+            <!--
             <li><a id="blog_nav_admin" class="menu" rel="nofollow" href="{% url 'blog:category' %}">admin</a></li>
+            -->  
         </ul>
         </div>
     </div>
@@ -101,7 +103,7 @@
                   {% if contacts.has_previous %}
                       <li><a href="?page={{ contacts.previous_page_number }}">previous</a></li>
                   {% endif %}
-                  
+
                   {% if current_page == first_page %}
                       <li>{{ current_page }}</li>
                   {% else %}
@@ -117,7 +119,7 @@
                   {% endfor %}
 
                   {% if current_page != first_page and current_page != last_page %}
-                      <span>{{ current_page }}</span>
+                  <span>{{ current_page }}</span>
                   {% endif %}
 
                   {% for RightPage in right_pages %}
@@ -128,12 +130,14 @@
                       <span>...</span>
                   {% endif %}
 
-                  {% if current_page == last_page %}
+                  {% if current_page == first_page and current_page == last_page %}
+                 
+                  {% elif current_page == last_page %}
                     <li>{{ current_page }}</li>
                   {% else %}
                     <li><a href="?page={{ last_page }}">{{ last_page }}</a></li>
                   {% endif %}
-
+                  
                   {% if contacts.has_next %}
                     <li><a href="?page={{ contacts.next_page_number }}">next</a></li>
                   {% endif %}
@@ -151,12 +155,19 @@
             
           <div class="sidebar-module sidebar-module-inset">
             <h4>About</h4>
+            <!--
             <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            -->
+            <p><em>SimonCZW blog. </em>Build this blog for learning how to learn a framework and try to code by myself firstly.</p>
           </div>
           
           <div class="sidebar-module">
             <h4>Archives</h4>
             <ol class="list-unstyled">
+              {% for category in CategoryList %}
+              <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
+              {% endfor %}
+              <!--
               <li><a href="#">March 2014</a></li>
               <li><a href="#">February 2014</a></li>
               <li><a href="#">January 2014</a></li>
@@ -169,15 +180,15 @@
               <li><a href="#">June 2013</a></li>
               <li><a href="#">May 2013</a></li>
               <li><a href="#">April 2013</a></li>
+              -->
             </ol>
           </div>
           
           <div class="sidebar-module">
             <h4>Elsewhere</h4>
             <ol class="list-unstyled">
-              <li><a href="https://github.com/">GitHub</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
+              <li><a href="https://github.com/SimonCZW/MyFirstBlog">GitHub</a></li>
+              <li><a href="http://weibo.com/u/2109515312">Weibo</a></li>
             </ol>
           </div>
         </div><!-- /.blog-sidebar -->

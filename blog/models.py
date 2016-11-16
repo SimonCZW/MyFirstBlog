@@ -1,14 +1,13 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-#from django.core.urlresolvers import reverse
 from django.urls import reverse
-
+import urllib2
 
 @python_2_unicode_compatible
 class Category(models.Model):
     name = models.CharField('NAME', max_length=32)
-    
+
     def __str__(self):
         return self.name
 

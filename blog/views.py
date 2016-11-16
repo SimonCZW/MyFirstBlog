@@ -6,7 +6,7 @@ from markdown import markdown
 
 def index(request):
     CategoryList = Category.objects.all()
-    PaperList = Paper.objects.all()
+    PaperList = Paper.objects.all().order_by('-update_time')
  #   PaperList2 = []
  #   for paper in  PaperList:
  #       paper.content =  markdown(paper.content)
@@ -43,5 +43,7 @@ def category_detail(request, category_id):
 def paper_detail(request, paper_id):
     paper = Paper.objects.filter(pk=paper_id)
     return render(request, 'paper_detail.html', {'paper': paper[0]})
+def aboutme(request):
+    return render(request, 'aboutme.html')
 
 
