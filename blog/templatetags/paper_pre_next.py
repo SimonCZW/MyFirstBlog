@@ -79,4 +79,20 @@ def get_next_name(paper_pk):
     next_paper=Paper.objects.filter(pk=next_paper_pk)[0]
     return next_paper.title
 
+#custom tag for paperweb goto previous or next paperweb
+@register.simple_tag(takes_context=True)
+def paper_previous_next_parse(context, paper_pk):
+    context['paper_has_previous'] = has_previous_paper(paper_pk)
+    context['paper_has_next'] = has_next_paper(paper_pk)
+
+    if context['paper_has_previous']:
+        context['previous_paper_url'] = get_previous_url(paper_pk)
+        context['previous_paper_title'] = get_previous_name(paper_pk)
+
+    if context['paper_has_next']:
+        context['next_paper_url'] = get_next_url(paper_pk)
+        context['next_paper_title'] = get_next_name(paper_pk)
+
+    return ''
+
 
