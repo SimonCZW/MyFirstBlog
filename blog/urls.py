@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from blog import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -25,3 +27,8 @@ urlpatterns = [
     url(r'^category/(?P<category_id>[0-9]+)/$', views.category_detail, name='category_detail'),
     url(r'^paper/(?P<paper_id>[0-9]+)/$', views.paper_detail, name='paper'),
 ]
+#append url('media/' ) route. MEDIA_URL=/media/,MEDIA_ROOT=/home/czw/MyFirstBlog/media
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
