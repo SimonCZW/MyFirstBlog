@@ -16,6 +16,7 @@ class Category(models.Model):
 @python_2_unicode_compatible
 class Paper(models.Model):
     title = models.CharField('TITLE', max_length=32)
+    abstract = models.CharField('ABSTRACT', max_length=256, null=True)
     content = models.TextField('CONTENT')
     created_time = models.DateTimeField('CREATED_TIME', auto_now_add=True)
     update_time = models.DateTimeField('UPDATE_TIME', auto_now=True)
