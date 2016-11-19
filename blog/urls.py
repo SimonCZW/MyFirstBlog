@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'^category/$', views.category, name='category'),
     url(r'^category/(?P<category_id>[0-9]+)/$', views.category_detail, name='category_detail'),
     url(r'^paper/(?P<paper_id>[0-9]+)/$', views.paper_detail, name='paper'),
+    url(r'^archive/$', views.archive, name='archive'),
+    url(r'^archive/(?P<created_year>[0-9]+)/(?P<created_month>[0-9]+)/$', views.archive_detail, name='archive_detail'),
 ]
 #append url('media/' ) route. MEDIA_URL=/media/,MEDIA_ROOT=/home/czw/MyFirstBlog/media
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

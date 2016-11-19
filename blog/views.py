@@ -3,26 +3,16 @@ from django.http import HttpResponse
 from blog.models import Category,Paper
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from markdown import markdown
-
+import datetime
 def index(request):
     CategoryList = Category.objects.all()
     PaperList = Paper.objects.all().order_by('-update_time')
- #   PaperList2 = []
- #   for paper in  PaperList:
- #       paper.content =  markdown(paper.content)
- #       PaperList2.append(paper)
-#    paginator = Paginator(PaperList, 3)
-#    page = request.GET.get('page')
-#    try:
-#        contacts = paginator.page(page)
-#    except PageNotAnInteger:
-#        contacts = paginator.page(1)
-#    except EmptyPage:
-#        contacts = pagintor.page(paginator.num_pages)
-    return render(request, 'index.html', {'CategoryList':CategoryList ,'PaperList': PaperList})
-
-    #return render(request, 'index.html', {'CategoryList':CategoryList, 'contacts':contacts})
-    #return render(request, 'index.html', {'CategoryList':CategoryList, 'PaperList':PaperList})
+    #get a paper created_time list
+    Dates = Paper.objects.datetimes('created_time', 'month', order='DESC')
+    return render(request, 'index.html',
+        {'CategoryList':CategoryList,
+         'PaperList': PaperList,
+         'Dates': Dates})
 
 def test(request):
     return render(request, 'test.html', {'teststring':"Xstring"})
@@ -46,4 +36,16 @@ def paper_detail(request, paper_id):
 def aboutme(request):
     return render(request, 'aboutme.html')
 
+def archive(request):
+    dates = Paper.objects.datetimes('created_time', 'month', order='DESC')
+    return render(request, 'archive.html', {'dates':dates})
+
+def archive_detail(request, created_year, created_month):
+    #papers_of_year_month_list = Paper.objects.filter(
+    #    created_time=datetime(created_year, created_month))
+    papers_of_year_month_list = Paper.objects.filter(
+        created_time__year=created_year,
+        created_time__month=created_month)
+    return render(request, 'archive_detail.html',
+                  {'papers': papers_of_year_month_list})
 
