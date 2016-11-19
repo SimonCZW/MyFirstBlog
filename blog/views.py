@@ -1,18 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from blog.models import Category,Paper
+from blog.models import Category,Paper,Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from markdown import markdown
 import datetime
 def index(request):
     CategoryList = Category.objects.all()
+    TagList = Tag.objects.all()
     PaperList = Paper.objects.all().order_by('-update_time')
     #get a paper created_time list
     Dates = Paper.objects.datetimes('created_time', 'month', order='DESC')
     return render(request, 'index.html',
         {'CategoryList':CategoryList,
          'PaperList': PaperList,
-         'Dates': Dates})
+         'Dates': Dates,
+         'TagList': TagList})
 
 def test(request):
     return render(request, 'test.html', {'teststring':"Xstring"})
@@ -48,4 +50,10 @@ def archive_detail(request, created_year, created_month):
         created_time__month=created_month)
     return render(request, 'archive_detail.html',
                   {'papers': papers_of_year_month_list})
+
+def tags(request, tag_id):
+    tags = Tag.objects.get(pk=tag_id)
+    papers = Paper.objects.filter(tags=tags)
+    return render(request, 'tags.html', {'papers': papers})
+
 

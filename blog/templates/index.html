@@ -175,6 +175,15 @@
           </div>
 
           <div class="sidebar-module">
+            <h4>Tags</h4>
+            <ol class="list-unstyled">
+              {% for tag in TagList %}
+              <li><a href="{{ tag.get_absolute_url }}">{{ tag }}</a></li>
+              {% endfor %}
+            </ol>
+          </div>
+
+          <div class="sidebar-module">
             <h4>dates</h4>
             <ol class="list-unstyled">
               {% regroup Dates by year as dates_by_year %}

@@ -14,6 +14,16 @@ class Category(models.Model):
         return reverse('blog:category_detail', kwargs={'category_id':self.pk})
 
 @python_2_unicode_compatible
+class Tag(models.Model):
+    name = models.CharField('NAME', max_length=32)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('blog:tag', kwargs={'tag_id':self.pk})
+
+@python_2_unicode_compatible
 class Paper(models.Model):
     title = models.CharField('TITLE', max_length=32)
     abstract = models.CharField('ABSTRACT', max_length=256, null=True)
@@ -23,6 +33,7 @@ class Paper(models.Model):
     author = models.CharField('AUTHOR', max_length=32)
     category = models.ManyToManyField(Category, blank=True)
     images = models.ImageField(upload_to='photos',null=True,blank=True)
+    tags = models.ManyToManyField(Tag, null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('blog:paper', kwargs={'paper_id':self.pk})
