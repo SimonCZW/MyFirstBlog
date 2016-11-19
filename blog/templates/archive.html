@@ -1,0 +1,18 @@
+<!--
+{% for i in dates %}
+  <p>{{ i }}</p>
+  {% endfor %}
+-->
+
+{% regroup dates by year as dates_by_year %}
+<ul>
+  {% for year in dates_by_year %}
+    {% for month in year.list %}
+      <li>
+        <a href="{{ year.grouper }}/{{ month|date:'m'}}">{{ year.grouper }},{{ month|date:'m' }}</a>
+      </li>
+    {% endfor %}
+  {% endfor %}
+</ul>
+
+
