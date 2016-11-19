@@ -88,8 +88,12 @@
           <div class="blog-post">
             <!--  <h3 class="blog-post-title">{{ contact.title }}</h3>
             <p class="blog-post-meta">{{ contact.update_time }} by {{ contact.author }}  <a href="{{ contact.get_absolute_url }}">Readmore</a></p>
-            -->
             {{ contact.content|Trans4markdown }}
+            -->
+            <h1>{{ contact.title }}</h1>
+
+            {{ contact.abstract }}
+            
             <p class="blog-post-meta">{{ contact.update_time }} by {{ contact.author }}  <a href="{{ contact.get_absolute_url }}">Readmore</a></p>
             <hr />
           </div>
