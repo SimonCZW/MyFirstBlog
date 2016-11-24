@@ -28,6 +28,7 @@
       <a href={{ next_paper_url }}>next1: {{ next_paper_title }}</a>
     {% endif %}
 
+    <p>Click: {{ paper.click }}</p>
 
     {% load markdown_tags %}  
     <p>{{ paper.content|Trans4markdown }}</p>

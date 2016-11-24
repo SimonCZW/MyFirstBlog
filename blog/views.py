@@ -7,7 +7,7 @@ import datetime
 def index(request):
     CategoryList = Category.objects.all()
     TagList = Tag.objects.all()
-    PaperList = Paper.objects.all().order_by('-update_time')
+    PaperList = Paper.objects.all().order_by('-created_time')
     #get a paper created_time list
     Dates = Paper.objects.datetimes('created_time', 'month', order='DESC')
     return render(request, 'index.html',
@@ -33,8 +33,11 @@ def category_detail(request, category_id):
     return render(request, 'category_detail.html', {'papers': papers})
 
 def paper_detail(request, paper_id):
-    paper = Paper.objects.filter(pk=paper_id)
-    return render(request, 'paper_detail.html', {'paper': paper[0]})
+    paper = Paper.objects.filter(pk=paper_id)[0]
+    paper.click += 1
+    paper.save()
+    return render(request, 'paper_detail.html', {'paper': paper})
+
 def aboutme(request):
     return render(request, 'aboutme.html')
 
