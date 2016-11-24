@@ -92,8 +92,10 @@
             -->
             <h1>{{ contact.title }}</h1>
 
-            {{ contact.abstract }}
-            
+            <h4>{{ contact.abstract }}</h4>
+
+            <p>Click: {{ contact.click }}</p>
+
             <p class="blog-post-meta">{{ contact.update_time }} by {{ contact.author }}  <a href="{{ contact.get_absolute_url }}">Readmore</a></p>
             <hr />
           </div>
